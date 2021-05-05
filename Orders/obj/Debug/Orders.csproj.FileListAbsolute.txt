@@ -1,0 +1,6 @@
+C:\Users\nicol\OneDrive - Bellevue College\ISIT420AdvancedDataAccessTechniques\New folder (5)\hw4ASPapi\Orders\bin\Debug\Orders.dll
+C:\Users\nicol\OneDrive - Bellevue College\ISIT420AdvancedDataAccessTechniques\New folder (5)\hw4ASPapi\Orders\bin\Debug\Orders.pdb
+C:\Users\nicol\OneDrive - Bellevue College\ISIT420AdvancedDataAccessTechniques\New folder (5)\hw4ASPapi\Orders\obj\Debug\Orders.csprojAssemblyReference.cache
+C:\Users\nicol\OneDrive - Bellevue College\ISIT420AdvancedDataAccessTechniques\New folder (5)\hw4ASPapi\Orders\obj\Debug\Orders.csproj.CoreCompileInputs.cache
+C:\Users\nicol\OneDrive - Bellevue College\ISIT420AdvancedDataAccessTechniques\New folder (5)\hw4ASPapi\Orders\obj\Debug\Orders.dll
+C:\Users\nicol\OneDrive - Bellevue College\ISIT420AdvancedDataAccessTechniques\New folder (5)\hw4ASPapi\Orders\obj\Debug\Orders.pdb
