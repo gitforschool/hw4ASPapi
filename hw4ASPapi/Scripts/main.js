@@ -1,9 +1,14 @@
 ﻿var uri = 'api/Orders';
 
-//$(document).ready(function () {
-//    GetOrdersList();
-//});
+$(document).ready(function () {
+    GetOrderList();
+});
 
+var OrderDetails = {
+    
+    Store: " ",
+    CDSales: " "
+    }
 
 
 function GetOrderList() {
@@ -35,6 +40,7 @@ function GetOrdersList() {
         dataType: "json",
         success: function (orderCount) {
             OrderListSuccess(orderCount);
+            console.log(orderCount);
         },
         error: function (request, message, error) {
             handleException(request, message, error);
@@ -45,8 +51,9 @@ function GetOrdersList() {
 function OrderListSuccess(orderCount) {
     // Iterate over the collection of data
     $.each(orderCount, function (index, order) {
-        // Add a row to the GradedAssignment table
+        // Add a row to the Order Detail table
         orderAddRow(order);
+        console.log(order);
     });
 }
 
@@ -54,6 +61,7 @@ function orderAddRow(order) {
     // Check if <tbody> tag exists, add one if not
     if ($("#orderTable tbody").length == 0) {
         $("#orderTable").append("<tbody></tbody>");
+        console.log(order);
     }
     // Append row to <table>
     $("#orderTable tbody").append(
@@ -63,8 +71,8 @@ function orderAddRow(order) {
 function orderBuildTableRow(order) {
     var ret =
         "<tr>" +
-        "<td>" + order.StoreID + "</td>" +
-        "<td>" + order.Pr + "</td>" +
+        "<td>" + order.Store + "</td>" +
+        "<td>" + order.CDSales + "</td>" +
         "</td>"
     "</tr>";
     return ret;
