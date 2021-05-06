@@ -28,26 +28,41 @@ namespace hw4ASPapi.Controllers
 
 
             var OrderQuery =
-                                //from o in db.Orders
-                                //group o by new
-                                from o in db.Orders
-                                where o.pricePaid > 13
-                                group o by o.storeID into orderGroup
-                                let count = orderGroup.Count()
-                                orderby count descending
-                                select new
-                                {
-                                    Store = orderGroup.Key,
-                                    CDSales = orderGroup.Count()
-                                };
+
+                                  from o in db.Orders
+                                  where o.pricePaid > 13
+                                  join s in db.StoreTables on  o.storeID equals s.storeID 
+                                  group new { o, s } by s.City into orderGroup
+                                  let count = orderGroup.Count()
+                                  orderby count descending
+                                  select new
+                                  {
+                                      Store = orderGroup.Key,
+                                      
+                                      CDSales = orderGroup.Count()
+                                  };
+
+
             return OrderQuery.ToList();
+
+            //                    from o in db.Orders
+            //                    where o.pricePaid > 13 
+            //                    group o by o.storeID into orderGroup
+            //                    let count = orderGroup.Count()
+            //                    orderby count descending
+            //                    select new
+            //                    {
+            //                        Store = orderGroup.Key,
+            //                        CDSales = orderGroup.Count()
+            //                    };
+            //return OrderQuery.ToList();
         }
 
         //-------------------------------------------------------------------------------------------
 
         //Prepopulate Name Drop Down
-       
-       [Route ("people")]
+
+        [Route ("people")]
         [HttpGet]
         public IEnumerable<object> GetPeople()
         {
