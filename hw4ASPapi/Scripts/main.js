@@ -1,40 +1,12 @@
-﻿var uri = 'api/Orders';
-
-$(document).ready(function () {
-    GetOrderList();
-});
-
-var OrderDetails = {
-    
-    Store: " ",
-    CDSales: " "
-    }
+﻿
 
 
-function GetOrderList() {
-    // Send an AJAX request
-    $.get(uri)
-        .done(function (data) {
-            $('#orders').empty();
-            console.log(data);
-            // On success, 'data' contains a list of notes.
-            $.each(data, function (key, item) {
-                // Add a list item for the note.
-                $('<li>', { text: formatItem(item) }).appendTo($('#orders'));
-            });
-        });
-}
-
-function formatItem(item) {
-    //: {$id: "1", NoteID: 1, Description: "Must Do ASAP", Content: "Get this working"}length: 1__proto__: Array(0)
-    return item.OrderID + " : " + item.PriceList;
-}
 
 
 function GetOrdersList() {
 
     $.ajax({
-        url: uri,
+        url: 'api/orders',
         data: "",
         type: "GET",
         dataType: "json",
@@ -77,4 +49,41 @@ function orderBuildTableRow(order) {
     "</tr>";
     return ret;
 }
+
+
+//-------------------------------------------------------------------------------------
+
+////Function to populate name drop down
+//$(function () {
+//    $.ajax({
+//        type: "GET",
+//        url: 'api/orders',
+//        data: '{}',
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        success: function (r) {
+//            $.each(r, function (key, person) {
+//                $('#person').append($('<option></option>').val(person.$id).html(person.FirstName + " " + person.LastName));
+//            });
+//        }
+//    });
+//});
+
+//----------------------------------------------------------
+
+//////Function for City Drop Down Menu
+//$(function () {
+//    $.ajax({
+//        type: "GET",
+//        url: 'api/orders',
+//        data: '{}',
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        success: function (r) {
+//            $.each(r, function (key, person) {
+//                $('#citySales').append($('<option></option>').val(person.$id).html(person.City));
+//            });
+//        }
+//    });
+//});
 
