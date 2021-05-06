@@ -28,9 +28,13 @@ namespace hw4ASPapi.Controllers
 
 
             var OrderQuery =
+                                //from o in db.Orders
+                                //group o by new
                                 from o in db.Orders
                                 where o.pricePaid > 13
                                 group o by o.storeID into orderGroup
+                                let count = orderGroup.Count()
+                                orderby count descending
                                 select new
                                 {
                                     Store = orderGroup.Key,
