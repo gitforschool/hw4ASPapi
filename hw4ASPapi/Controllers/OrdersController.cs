@@ -10,10 +10,12 @@ using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Web.UI.WebControls;
+using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
+using RouteAttribute = System.Web.Http.RouteAttribute;
 
 namespace hw4ASPapi.Controllers
 {
-
+    [System.Web.Http.RoutePrefix("api/orders")]
     public class OrdersController : ApiController
     {
 
@@ -40,33 +42,38 @@ namespace hw4ASPapi.Controllers
         //-------------------------------------------------------------------------------------------
 
         //Prepopulate Name Drop Down
-        //public IEnumerable<object> GetPeople()
-        //{
+       
+       [Route ("people")]
+        [HttpGet]
+        public IEnumerable<object> GetPeople()
+        {
 
-        //         var PeopleQuery = from p in db.SalesPersonTables
-        //                      select new
-        //                      {
-        //                          p.FirstName,
-        //                          p.LastName
-        //                      };
-        //        return PeopleQuery.ToList();
-        //}
+            var PeopleQuery = from p in db.SalesPersonTables
+                              select new
+                              {
+                                  p.FirstName,
+                                  p.LastName
+                              };
+            return PeopleQuery.ToList();
+        }
 
 
         //-----------------------------------------------------------------------------------------------------
 
 
         //Prepopulate City Drop Down Menu
-        //public IEnumerable<object> GetCities()
-        //{
-        //    var CityQuery = from s in db.StoreTables
-        //                    select new
-        //                    {
-        //                        s.City
+       [Route("city")]
+        [HttpGet]
+        public IEnumerable<object> GetCities()
+        {
+            var CityQuery = from s in db.StoreTables
+                            select new
+                            {
+                                s.City
 
-        //                    };
-        //       return CityQuery.ToList();
-        //}
+                            };
+            return CityQuery.ToList();
+        }
 
     }
 }

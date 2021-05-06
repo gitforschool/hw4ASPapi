@@ -54,36 +54,36 @@ function orderBuildTableRow(order) {
 //-------------------------------------------------------------------------------------
 
 ////Function to populate name drop down
-//$(function () {
-//    $.ajax({
-//        type: "GET",
-//        url: 'api/orders',
-//        data: '{}',
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: function (r) {
-//            $.each(r, function (key, person) {
-//                $('#person').append($('<option></option>').val(person.$id).html(person.FirstName + " " + person.LastName));
-//            });
-//        }
-//    });
-//});
+$(function () {
+    $.ajax({
+        type: "GET",
+        url: 'api/orders/people',
+        data: '{}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            $.each(r, function (key, person) {
+                $('#person').append($('<option></option>').val(person.$id).html(person.FirstName + " " + person.LastName));
+            });
+        }
+    });
+});
 
 //----------------------------------------------------------
 
 //////Function for City Drop Down Menu
-//$(function () {
-//    $.ajax({
-//        type: "GET",
-//        url: 'api/orders',
-//        data: '{}',
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: function (r) {
-//            $.each(r, function (key, person) {
-//                $('#citySales').append($('<option></option>').val(person.$id).html(person.City));
-//            });
-//        }
-//    });
-//});
+$(function () {
+    $.ajax({
+        type: "GET",
+        url: 'api/orders/city',
+        data: '{}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            $.each(r, function (key, person) {
+                $('#citySales').append($('<option></option>').val(person.$id).html(person.City));
+            });
+        }
+    });
+});
 
