@@ -22,6 +22,7 @@ namespace hw4ASPapi
         public int dayPurch { get; set; }
         public int hourPurch { get; set; }
     
+        public virtual CDTable CDTable { get; set; }
         public virtual SalesPersonTable SalesPersonTable { get; set; }
         public virtual StoreTable StoreTable { get; set; }
     }

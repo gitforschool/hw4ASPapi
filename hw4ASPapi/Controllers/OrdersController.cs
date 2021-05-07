@@ -19,18 +19,20 @@ namespace hw4ASPapi.Controllers
     public class OrdersController : ApiController
     {
 
-        NodeOrders500Entitie db = new NodeOrders500Entitie();
+        //NodeOrders500Entitie db = new NodeOrders500Entitie();
+        NodeOrders500Entities1 db = new NodeOrders500Entities1();
         //GET: Orders
 
         //Fill Order Detail Table With Given Data
         public IEnumerable<object> GetOrders()
         {
-
-
             var OrderQuery =
                                 from o in db.Orders
                                 where o.pricePaid > 13
-                                group o by o.storeID into orderGroup
+                                join s in db.StoreTables on o.storeID equals s.storeID
+                                group new {o,s} by s.City into orderGroup
+                                let count = orderGroup.Count()
+                                orderby count descending
                                 select new
                                 {
                                     Store = orderGroup.Key,
@@ -42,8 +44,8 @@ namespace hw4ASPapi.Controllers
         //-------------------------------------------------------------------------------------------
 
         //Prepopulate Name Drop Down
-       
-       [Route ("people")]
+
+        [Route("people")]
         [HttpGet]
         public IEnumerable<object> GetPeople()
         {
@@ -62,7 +64,7 @@ namespace hw4ASPapi.Controllers
 
 
         //Prepopulate City Drop Down Menu
-       [Route("city")]
+        [Route("city")]
         [HttpGet]
         public IEnumerable<object> GetCities()
         {
@@ -75,5 +77,46 @@ namespace hw4ASPapi.Controllers
             return CityQuery.ToList();
         }
 
+        //-----------------------------------------------------------------------------------------------------
+
+
+        // Employee table query
+        [Route("employeesales")]
+        [HttpGet]
+        public IHttpActionResult GetEmployeeSales(string name)
+        {
+            var employeeSalesQuery = from ordersTable in db.Orders
+                                     join salesTable in db.SalesPersonTables on ordersTable.salesPersonID equals salesTable.salesPersonID
+                                     //where salesTable.LastName == name
+                                     group new { ordersTable, salesTable } by salesTable.LastName into SalesPersonGroup
+                                     select new
+                                     {
+                                         Store = SalesPersonGroup.Key,
+                                         CDSales = SalesPersonGroup.Sum(x => x.ordersTable.pricePaid)
+                                     };
+
+            return Ok(employeeSalesQuery);
+        }
+
+
+        //-----------------------------------------------------------------------------------------------------
+
+        // Store total sales query
+        [Route("storesales")]
+        [HttpGet]
+        public IHttpActionResult GetStoreSales(string name)
+        {
+            var storeSalesQuery = from ordersTable in db.Orders
+                                     join salesTable in db.SalesPersonTables on ordersTable.salesPersonID equals salesTable.salesPersonID
+                                     //where salesTable.LastName == name
+                                     group new { ordersTable, salesTable } by salesTable.LastName into SalesPersonGroup
+                                     select new
+                                     {
+                                         Store = SalesPersonGroup.Key,
+                                         Sales = SalesPersonGroup.Sum(x => x.ordersTable.pricePaid)
+                                     };
+
+            return Ok(storeSalesQuery);
+        }
     }
 }

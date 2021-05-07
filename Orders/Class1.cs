@@ -10,5 +10,8 @@ namespace Orders
     {
         public int StoreID { get; set; }
         public int PricePaid { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int SalesPersonID { get; set; }
     }
 }

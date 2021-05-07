@@ -162,14 +162,20 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="CDTable.cs">
+      <DependentUpon>Sam.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Inventory.cs">
+      <DependentUpon>Sam.tt</DependentUpon>
+    </Compile>
     <Compile Include="Order.cs">
-      <DependentUpon>OrdersDataModel.tt</DependentUpon>
+      <DependentUpon>Sam.tt</DependentUpon>
     </Compile>
     <Compile Include="OrdersDataModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -188,10 +194,28 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesPersonTable.cs">
-      <DependentUpon>OrdersDataModel.tt</DependentUpon>
+      <DependentUpon>Sam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sam.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sam.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sam.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sam.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sam.edmx</DependentUpon>
     </Compile>
     <Compile Include="StoreTable.cs">
-      <DependentUpon>OrdersDataModel.tt</DependentUpon>
+      <DependentUpon>Sam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Sam.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +265,16 @@
     <Content Include="OrdersDataModel.edmx.diagram">
       <DependentUpon>OrdersDataModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Sam.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Sam.edmx</DependentUpon>
+      <LastGenOutput>Sam.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Sam.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Sam.edmx</DependentUpon>
+      <LastGenOutput>Sam.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -264,6 +298,13 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Sam.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Sam.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Sam.edmx.diagram">
+      <DependentUpon>Sam.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

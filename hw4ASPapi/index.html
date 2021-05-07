@@ -40,8 +40,9 @@
                                 <h3>Sales Person Sales</h3>
                                 <br />
                                 <br />
-                                <label for="perosn">Total Sales for All Sales Person</label>
+                                <label for="person">Total Sales for All Sales Person</label>
                                 <select name="person" class="form-control" id="person"></select>
+                                <button id="empSalesBtn" type="button" class="btn btn-primary">Get Sales</button>
                                 <br />
                                 <br />
                                 <table id="SalesTable" class="table table-bordered table-condensed table-striped" style="background: white; border: 3px solid black;" ;>
@@ -54,37 +55,29 @@
                                 </table>
 
                             </div>
-                        <div class="col-sm-4">
-                            <h3>Stores Total Sales</h3>
-                            <br />
-                            <br />
-                            <label for="store">Select Store to View Total Sales</label>
-                            <select name="citySales" class="form-control" id="citySales"></select>
-                            <br />
-                            <br />
-                            <table id="SalesTable" class="table table-bordered table-condensed table-striped" style="background: white; border: 3px solid black;" ;>
-                                <thead style="background: grey" ;>
-                                    <tr>
-                                        <th>Store Location</th>
-                                        <th>Total Sales</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                           
-
+                         <div class="col-sm-4">
+                             <h3>Stores Total Sales</h3>
+                             <br />
+                             <br />
+                             <label for="store">Select Store to View Total Sales</label>
+                             <select name="citySales" class="form-control" id="citySales"></select>
+                             <button id="storeSalesBtn" type="button" class="btn btn-primary">Get Store Sales</button>
+                             <br />
+                             <br />
+                             <table id="storeSalesTable" class="table table-bordered table-condensed table-striped" style="background: white; border: 3px solid black;" ;>
+                                 <thead style="background: grey" ;>
+                                     <tr>
+                                         <th>Store Location</th>
+                                         <th>Total Sales</th>
+                                     </tr>
+                                 </thead>
+                             </table>
+                         </div>
                      </div>
-
-                        
-
-
                 </div>
-
             </div>
-
         </div>
 
-            
             <script src="Scripts/main.js"></script>
 </body>
 </html>
