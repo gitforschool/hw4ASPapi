@@ -40,7 +40,7 @@ namespace hw4ASPapi.Controllers
 
                                       CDSales = orderGroup.Count()
                                   };
-            return OrderQuery.ToList();
+            return OrderQuery.Distinct().ToList();
 
         }
 
@@ -55,7 +55,6 @@ namespace hw4ASPapi.Controllers
 
             var PeopleQuery = (from o in db.Orders
                                join s in db.SalesPersonTables on o.salesPersonID equals s.salesPersonID
-                               //where o.salesPersonID <= 15
                                select new
                                {
                                    Person = s.FirstName
@@ -76,7 +75,8 @@ namespace hw4ASPapi.Controllers
         [HttpGet]
         public IEnumerable<object> GetCitiesList()
         {
-            var CityQuery = from s in db.StoreTables
+            var CityQuery = from o in db.Orders
+                            join s in db.StoreTables on o.storeID equals s.storeID
                             select new
                             {
                                 s.City
@@ -97,14 +97,13 @@ namespace hw4ASPapi.Controllers
 
             try
             {
-                var zero = 0;
                
                 var personSalesQuery = from o in db.Orders
                                        join s in db.SalesPersonTables on o.salesPersonID equals s.salesPersonID
                                        
                                        where s.FirstName == id 
                                        
-                                    //   let Person = s.FirstName + " " + s.LastName
+                                    //let Person = s.FirstName + " " + s.LastName
                                        group new { o, s } by s.FirstName into SalesPersonGroup
 
                                        select new
@@ -136,7 +135,6 @@ namespace hw4ASPapi.Controllers
                 //int myId = Int32.Parse(id);
 
                 var StoreSalesQuery = from o in db.Orders
-
                                       join s in db.StoreTables on o.storeID equals s.storeID
                                       where s.City == id
                                       group new { o, s } by s.City into SalesPersonGroup
