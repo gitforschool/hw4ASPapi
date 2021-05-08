@@ -57,7 +57,7 @@ namespace hw4ASPapi.Controllers
                                join s in db.SalesPersonTables on o.salesPersonID equals s.salesPersonID
                                select new
                                {
-                                   Person = s.FirstName
+                                   Person = s.FirstName + " " + s.LastName
                                });
 
 
@@ -82,7 +82,7 @@ namespace hw4ASPapi.Controllers
                                 s.City
 
                             };
-            return CityQuery.ToList();
+            return CityQuery.Distinct().ToList();
         }
 
         // ---------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,43 @@
+﻿body {
+    padding-top: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 20px;
+    background: light-grey ;
+}
+
+Set padding to keep content from hitting the edges
+.body-content {
+    padding-left: 100px;
+    padding-right: 100px;
+    background: white;
+}
+
+
+
+.row {
+    margin: auto;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+#border {
+    padding: 20px;
+}
+
+.col-sm-7, .col-sm-4 {
+    float: none;
+    padding-left: 50px;
+    padding-right: 75px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: lightgoldenrodyellow;
+    color: darkslategrey;
+    border: 3px solid black;
+    display: inline-block;
+    width: 150px;
+}
+
+table, thead, th, tr, td {
+    border: 3px solid black;
+}
