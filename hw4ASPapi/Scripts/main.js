@@ -63,7 +63,7 @@ $(function () {
         dataType: "json",
         success: function (r) {
             $.each(r, function (key, person) {
-                $('#person').append($('<option></option>').val(person.$id).html(person.Person));
+                $('#person').append($('<option></option>').val(person.$id).html(person.FirstName));
             });
         }
     });

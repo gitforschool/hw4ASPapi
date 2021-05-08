@@ -1,4 +1,5 @@
-﻿using System;
+﻿  
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -57,7 +58,7 @@ namespace hw4ASPapi.Controllers
                                join s in db.SalesPersonTables on o.salesPersonID equals s.salesPersonID
                                select new
                                {
-                                   Person = s.FirstName + " " + s.LastName
+                                   s.FirstName
                                });
 
 
@@ -97,13 +98,13 @@ namespace hw4ASPapi.Controllers
 
             try
             {
-               
+
                 var personSalesQuery = from o in db.Orders
                                        join s in db.SalesPersonTables on o.salesPersonID equals s.salesPersonID
-                                       
-                                       where s.FirstName == id 
-                                       
-                                    //let Person = s.FirstName + " " + s.LastName
+
+                                       where s.FirstName == id
+
+                                       //let Person = s.FirstName + " " + s.LastName
                                        group new { o, s } by s.FirstName into SalesPersonGroup
 
                                        select new
@@ -157,3 +158,4 @@ namespace hw4ASPapi.Controllers
     }
 
 }
+
