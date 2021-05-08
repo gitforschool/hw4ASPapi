@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Web.UI.WebControls;
 using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
 using RouteAttribute = System.Web.Http.RouteAttribute;
+using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
 
 namespace hw4ASPapi.Controllers
 {
@@ -26,64 +27,54 @@ namespace hw4ASPapi.Controllers
         public IEnumerable<object> GetOrders()
         {
 
-
             var OrderQuery =
-
                                   from o in db.Orders
                                   where o.pricePaid > 13
-                                  join s in db.StoreTables on  o.storeID equals s.storeID 
+                                  join s in db.StoreTables on o.storeID equals s.storeID
                                   group new { o, s } by s.City into orderGroup
                                   let count = orderGroup.Count()
                                   orderby count descending
                                   select new
                                   {
                                       Store = orderGroup.Key,
-                                      
+
                                       CDSales = orderGroup.Count()
                                   };
-
-
             return OrderQuery.ToList();
 
-            //                    from o in db.Orders
-            //                    where o.pricePaid > 13 
-            //                    group o by o.storeID into orderGroup
-            //                    let count = orderGroup.Count()
-            //                    orderby count descending
-            //                    select new
-            //                    {
-            //                        Store = orderGroup.Key,
-            //                        CDSales = orderGroup.Count()
-            //                    };
-            //return OrderQuery.ToList();
         }
 
         //-------------------------------------------------------------------------------------------
 
         //Prepopulate Name Drop Down
 
-        [Route ("people")]
+        [Route("people")]
         [HttpGet]
-        public IEnumerable<object> GetPeople()
+        public IEnumerable<object> GetPeopleList()
         {
 
-            var PeopleQuery = from p in db.SalesPersonTables
-                              select new
-                              {
-                                  p.FirstName,
-                                  p.LastName
-                              };
-            return PeopleQuery.ToList();
+            var PeopleQuery = (from o in db.Orders
+                               join s in db.SalesPersonTables on o.salesPersonID equals s.salesPersonID
+                               //where o.salesPersonID <= 15
+                               select new
+                               {
+                                   Person = s.FirstName
+                               });
+
+
+            var person = PeopleQuery;
+            return person.Distinct().ToList();
         }
+
 
 
         //-----------------------------------------------------------------------------------------------------
 
 
         //Prepopulate City Drop Down Menu
-       [Route("city")]
+        [Route("city")]
         [HttpGet]
-        public IEnumerable<object> GetCities()
+        public IEnumerable<object> GetCitiesList()
         {
             var CityQuery = from s in db.StoreTables
                             select new
@@ -94,5 +85,77 @@ namespace hw4ASPapi.Controllers
             return CityQuery.ToList();
         }
 
+        // ---------------------------------------------------------------------------------------------------------------
+
+
+
+        //Get Data From Selected Sales Person
+        [System.Web.Http.Route("pSales")]
+        [HttpGet]
+        public IHttpActionResult PersonSales(string id)
+        {
+
+            try
+            {
+                var zero = 0;
+               
+                var personSalesQuery = from o in db.Orders
+                                       join s in db.SalesPersonTables on o.salesPersonID equals s.salesPersonID
+                                       
+                                       where s.FirstName == id 
+                                       
+                                    //   let Person = s.FirstName + " " + s.LastName
+                                       group new { o, s } by s.FirstName into SalesPersonGroup
+
+                                       select new
+                                       {
+                                           Person = SalesPersonGroup.Key,
+                                           Price = SalesPersonGroup.Sum(x => x.o.pricePaid)
+
+                                       };
+                return Ok(personSalesQuery);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+
+        }
+
+        //--------------------------------------------------------------
+        //Store Sales
+
+        [System.Web.Http.Route("sSales")]
+        [HttpGet]
+        public IHttpActionResult StoreSales(string id)
+        {
+
+
+            try
+            {
+                //int myId = Int32.Parse(id);
+
+                var StoreSalesQuery = from o in db.Orders
+
+                                      join s in db.StoreTables on o.storeID equals s.storeID
+                                      where s.City == id
+                                      group new { o, s } by s.City into SalesPersonGroup
+                                      let count = SalesPersonGroup.Count()
+                                      select new
+                                      {
+                                          Store = SalesPersonGroup.Key,
+                                          Price = SalesPersonGroup.Sum(x => x.o.pricePaid)
+
+                                      };
+                return Ok(StoreSalesQuery);
+            }
+
+            catch (Exception)
+            {
+                return NotFound();
+            }
+
+        }
     }
+
 }
